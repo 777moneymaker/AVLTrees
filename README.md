@@ -15,3 +15,7 @@ sudo chmod +x play.py
 # then
 ./play.py  
 ```
+
+Authors
+-----
+**Milosz Chodkowski** [777moneymaker](https://github.com/777moneymaker)
