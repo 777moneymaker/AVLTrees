@@ -4,6 +4,7 @@ Author: Miłosz Chodkowski
 Date Created: 25.03.2019
 Python Version: 3.7.2"""
 
+# Begin code
 
 from tree import AVLTree  # tree.py module
 import random
