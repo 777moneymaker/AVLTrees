@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 """AVL Trees and their simple functions.
-Implementation made for Algorithm's laboratories."""
+Author: Miłosz Chodkowski
+Date Created: 25.03.2019
+Python Version: 3.7.2"""
 
 
 from tree import AVLTree  # tree.py module
 import random
-
-__author__ = "Miłosz Chodkowski"
-__license__ = "MIT License "
-__version__ = "1.0"
-__maintainer__ = "Miłosz Chodkowski"
-__email__ = "milosz.chodkowski@student.put.poznan.pl"
-__status__ = "Production"
 
 if __name__ == "__main__":
     myList = []
