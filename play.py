@@ -1,9 +1,9 @@
-#!/usr/bin/env python
-'''AVL Trees and their simple functions.
+#!/usr/bin/env python3
+"""AVL Trees and their simple functions.
+Implementation made for Algorithm's laboratories."""
 
-Implementation made for Algorithm's laboratories.'''
 
-from tree import AVLTree # tree.py module
+from tree import AVLTree  # tree.py module
 import random
 
 __author__ = "Miłosz Chodkowski"

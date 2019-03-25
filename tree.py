@@ -1,5 +1,6 @@
-#!/usr/bin/env python
-'''Provides AVLTrees. Necessary for creating AVL Tree '''
+#!/usr/bin/env python3
+"""Provides AVLTrees.
+Necessary for creating AVL Tree"""
 
 
 class TreeNode:
