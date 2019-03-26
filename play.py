@@ -17,12 +17,3 @@ if __name__ == "__main__":
     myTree = AVLTree(myList)
 
     myTree.visualize()
-    print("")
-    myTree.visualize("inorder")
-    print("")
-    myTree.visualize("postorder")
-
-
-
-
-
