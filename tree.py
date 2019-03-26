@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Provides AVLTrees.
-Necessary for creating AVL Tree"""
+Necessary for creating AVL Tree
+"""
 
 
 class TreeNode:
@@ -25,7 +26,7 @@ class AVLTree:
                 for key in keys:
                     self.insert(key)
 
-    def add_as_child (self, parent_node, child_node):
+    def add_as_child(self, parent_node, child_node):
         if child_node.key < parent_node.key:
             if parent_node.left is None:
                 parent_node.left = child_node
@@ -64,10 +65,10 @@ class AVLTree:
         if node is not None:
             if node.is_Leaf():
                 self.remove_leaf(node)
-            elif (bool(node.left)) and (bool(node.right)):
+            elif bool(node.left) and bool(node.right):
                 self.remove_branch(node)
             else:
-                assert (node.left) and (node.right)
+                assert node.left and node.right
                 self.swap_with_child_and_remove(node)
 
     def remove_leaf(self, node):
@@ -84,7 +85,7 @@ class AVLTree:
             if node.parent.left == node:
                 node.parent.left = node.right or node.left
             else:
-                assert (node.parent.right == node)
+                assert node.parent.right == node
                 node.parent.right = node.right or node.left
             if node.left:
                 node.left.parent = node.parent
@@ -136,3 +137,4 @@ class AVLTree:
                 self.inorder_view(self.root_node)
             if order == "postorder":
                 self.postorder_view(self.root_node)
+               
