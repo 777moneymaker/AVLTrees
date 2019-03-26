@@ -14,7 +14,7 @@ from tree import AVLTree  # tree.py module
 if __name__ == "__main__":
 
     myTree2 = AVLTree()
-    myList2 = [random.randint(10,80) for i in range(10)]
+    myList2 = [random.randint(10, 80) for i in range(10)]
     myList2.sort()
     print(*myList2, "\n")
     myTree2.insert_from_list(myList2)

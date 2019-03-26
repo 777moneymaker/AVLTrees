@@ -5,7 +5,7 @@ Necessary for creating AVL Tree
 """
 
 
-class TreeNode:
+class TreeNode:  # Nodes
     def __init__(self, key):
         self.parent = None
         self.left = None
@@ -19,7 +19,7 @@ class TreeNode:
             return False
 
 
-class AVLTree:
+class AVLTree:  # General tree
     def __init__(self, keys=None):
         self.root_node = None
         if keys is not None:
@@ -27,7 +27,7 @@ class AVLTree:
                 for key in keys:
                     self.insert(key)
 
-    def add_as_child(self, parent_node, child_node):
+    def add_as_child(self, parent_node, child_node):  # Used in insert()
         if child_node.key < parent_node.key:
             if parent_node.left is None:
                 parent_node.left = child_node
@@ -52,20 +52,20 @@ class AVLTree:
     def insert_from_list(self, arr):
         if arr is None or len(arr) < 1:
             return None
-        piv = (len(arr)) // 2
+        piv = (len(arr)) // 2  # pivot
         left, right = [], []
         for key in arr[0:piv]:
             left.append(key)
         for key in arr[piv + 1:len(arr)]:
             right.append(key)
         self.insert(arr[piv])
-        self.insert_from_list(left)
+        self.insert_from_list(left)  # there goes recursion (magic)
         self.insert_from_list(right)
 
     def find(self, key):  # find function and used in remove()
         return self.find_in_subtree(self.root_node, key)
 
-    def find_in_subtree(self, node, key):  # used for find
+    def find_in_subtree(self, node, key):  # used for find()
         if node is not None:
             if key < node.key:
                 return self.find_in_subtree(node.left, key)
@@ -78,7 +78,7 @@ class AVLTree:
             else:  # key not found
                 return None
 
-    def find_path_to_key(self, node, key):
+    def find_path_to_key(self, node, key):  # prints path to given key except root
         if node is not None:
             if key < node.key:
                 print(node.key)
@@ -88,7 +88,7 @@ class AVLTree:
                 print(node.key)
                 self.find_path_to_key(node.right, key)
 
-    def remove(self, key):  # will remove first find
+    def remove(self, key):  # will remove first find except root
         node = self.find(key)
         if node is not None:
             if node.is_Leaf():
@@ -98,7 +98,7 @@ class AVLTree:
             else:
                 self.swap_with_child_and_remove(node)
 
-    def remove_leaf(self, node):
+    def remove_leaf(self, node):  # when there is no successor
         if node.parent is not None:
             if node.parent.left == node:
                 node.parent.left = None
@@ -107,7 +107,7 @@ class AVLTree:
                 node.parent.right = None
         del node
 
-    def remove_branch(self, node):
+    def remove_branch(self, node):  # when we have both successors
         if node.parent is not None:
             if node.parent.left == node:
                 node.parent.left = node.right or node.left
@@ -121,7 +121,7 @@ class AVLTree:
                 node.right.parent = node.parent
         del node
 
-    def swap_with_child_and_remove(self, node):
+    def swap_with_child_and_remove(self, node):  # when the is only one successor
         if node is not None:
             if node.right is not None:
                     if node.parent is not None:
@@ -134,7 +134,7 @@ class AVLTree:
                 node.left.parent = node.parent
             del node
 
-    def selfDelete(self):
+    def selfDelete(self):  # general function and visualization of deleting
         self.post_remove(self.root_node)
         return None
 
@@ -170,7 +170,7 @@ class AVLTree:
             self.postorder_view(printed_node.right)
         print(printed_node.key, end = " ")
 
-    def visualize(self, order = None):
+    def visualize(self, order = None):  # main function for specific visualization
         if self.root_node is not None:
             if order == "preorder" or order is None:
                 self.preorder_view(self.root_node)
