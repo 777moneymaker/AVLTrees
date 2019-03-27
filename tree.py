@@ -4,6 +4,7 @@
 Necessary for creating AVL Tree
 """
 
+import random
 
 class TreeNode:  # Nodes
     def __init__(self, key):
@@ -72,9 +73,14 @@ class AVLTree:  # General tree
             elif key > node.key:
                 return self.find_in_subtree(node.right, key)
             elif key == node.key:
-                if node is self.root_node:
-                    node = self.find_in_subtree(node.right, key)
-                return node
+                if node.right is not None:
+                    if node.right.key == node.key:
+                        node = self.find_in_subtree(node.right, key)
+                    return node
+                else:
+                    if node.left is not None:
+                        node = self.find_in_subtree(node.left)
+                    return node
             else:  # key not found
                 return None
 
