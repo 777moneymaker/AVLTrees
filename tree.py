@@ -4,7 +4,6 @@
 Necessary for creating AVL Tree
 """
 
-import random
 
 class TreeNode:  # Nodes
     def __init__(self, key):
@@ -105,39 +104,42 @@ class AVLTree:  # General tree
                 self.swap_with_child_and_remove(node)
 
     def remove_leaf(self, node):  # when there is no successor
-        if node.parent is not None:
-            if node.parent.left == node:
-                node.parent.left = None
+        parent = node.parent
+        if parent is not None:
+            if parent.left == node:
+                parent.left = None
             else:
-                assert node.parent.right == node
-                node.parent.right = None
+                assert parent.right == node
+                parent.right = None
         del node
 
     def remove_branch(self, node):  # when we have both successors
-        if node.parent is not None:
-            if node.parent.left == node:
-                node.parent.left = node.right or node.left
+        parent = node.parent
+        if parent is not None:
+            if parent.left == node:
+                parent.left = node.right or node.left
             else:
-                assert node.parent.right == node
-                node.parent.right = node.right or node.left
+                assert parent.right == node
+                parent.right = node.right or node.left
             if node.left is not None:
-                node.left.parent = node.parent
+                node.left.parent = parent
             else:
                 assert node.right
-                node.right.parent = node.parent
+                node.right.parent = parent
         del node
 
     def swap_with_child_and_remove(self, node):  # when the is only one successor
+        parent = node.parent
         if node is not None:
             if node.right is not None:
-                    if node.parent is not None:
-                        node.parent.right = node.right
-                        node.right.parent = node.parent
+                    if parent is not None:
+                        parent.right = node.right
+                        node.right.parent = parent
             else:
                 assert node.left
-                assert node.parent
-                node.parent.left = node.left
-                node.left.parent = node.parent
+                assert parent
+                parent.left = node.left
+                node.left.parent = parent
             del node
 
     def selfDelete(self):  # general function and visualization of deleting

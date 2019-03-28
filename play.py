@@ -21,10 +21,13 @@ def commands():
           "7 - exit")
 
 if __name__ == "__main__":
+
     commands()
+
     tree = AVLTree()
     numbers = [random.randint(10, 90) for i in range(15)]
     numbers.sort()
+
     while True:
         choice = input("Enter your choice: ")
         if choice == "1":
@@ -48,7 +51,7 @@ if __name__ == "__main__":
                 continue
         elif choice == "6":
             tree.selfDelete()
-        elif choice == "7":
+        elif choice == "7":  # bye!
             exit(0)
         else:
             print("Wrong!")
