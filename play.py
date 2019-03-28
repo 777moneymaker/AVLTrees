@@ -17,15 +17,18 @@ def commands():
           "3 - search for element \n"
           "4 - tree visualization\n"
           "5 - insert from sorted list \n"
-          "6 - postorder tree delete\n"
-          "7 - exit")
+          "6 - postorder delete\n"
+          "7 - exit \n")
 
 if __name__ == "__main__":
 
     commands()
 
     tree = AVLTree()
-    numbers = [random.randint(10, 90) for i in range(15)]
+    numbers, pre_numbers = [], [random.randint(10, 90) for i in range(15)]
+    for num in pre_numbers:
+        if num not in numbers:
+            numbers.append(num)
     numbers.sort()
 
     while True:
@@ -49,9 +52,9 @@ if __name__ == "__main__":
                 tree.insert_from_list(numbers)
             else:
                 continue
-        elif choice == "6":
+        elif choice == "6":  # bye!
             tree.selfDelete()
-        elif choice == "7":  # bye!
+        elif choice == "7":
             exit(0)
         else:
             print("Wrong!")

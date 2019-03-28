@@ -13,7 +13,7 @@ class TreeNode:  # Nodes
         self.key = key
 
     def is_Leaf(self):
-        if self.left is None and self.right is None:
+        if (self.left and self.right) is None:
             return True
         else:
             return False
@@ -24,30 +24,30 @@ class AVLTree:  # General tree
         self.root_node = None
         if keys is not None:
             if len(keys) >= 1:
-                for key in keys:
-                    self.insert(key)
+                for key in keys: self.insert(key)
 
-    def add_as_child(self, parent_node, child_node):  # Used in insert()
-        if child_node.key < parent_node.key:
-            if parent_node.left is None:
-                parent_node.left = child_node
-                child_node.parent = parent_node
+    def add_as_child(self, parent, child):  # Used in insert()
+        if child.key < parent.key:
+            if parent.left is None:
+                parent.left = child
+                child.parent = parent
             else:
-                self.add_as_child(parent_node.left, child_node)
+                self.add_as_child(parent.left, child)
         else:
-            assert child_node.key >= parent_node.key
-            if parent_node.right is None:
-                parent_node.right = child_node
-                child_node.parent = parent_node
+            assert child.key >= parent.key
+            if parent.right is None:
+                parent.right = child
+                child.parent = parent
             else:
-                self.add_as_child(parent_node.right, child_node)
+                self.add_as_child(parent.right, child)
 
     def insert(self, key):
+        root = self.root_node
         new_node = TreeNode(key)
-        if self.root_node is None:
+        if root is None:
             self.root_node = new_node
         else:
-            self.add_as_child(self.root_node, new_node)
+            self.add_as_child(root, new_node)
 
     def insert_from_list(self, arr):
         if arr is None or len(arr) < 1:
@@ -74,8 +74,8 @@ class AVLTree:  # General tree
             elif key == node.key:
                 if node.right is not None:
                     if node.right.key == node.key:
-                        node = self.find_in_subtree(node.right, key)
-                    return node
+                        right_node = self.find_in_subtree(node.right, key)
+                        return right_node
                 else:
                     if node.left is not None:
                         node = self.find_in_subtree(node.left)
@@ -132,14 +132,15 @@ class AVLTree:  # General tree
         parent = node.parent
         if node is not None:
             if node.right is not None:
-                    if parent is not None:
-                        parent.right = node.right
-                        node.right.parent = parent
-            else:
-                assert node.left
+                assert parent
+                parent.right = node.right
+                node.right.parent = parent
+            elif node.left is not None:
                 assert parent
                 parent.left = node.left
                 node.left.parent = parent
+            else:
+                return None
             del node
 
     def selfDelete(self):  # general function and visualization of deleting
@@ -147,6 +148,9 @@ class AVLTree:  # General tree
         return None
 
     def post_remove(self, node):  # postorder remove
+        root = self.root_node
+        if root.right is None and root.left is None:
+            return None
         if node is not None:
             #  Magic begins
             if node.left is not None:
@@ -157,26 +161,26 @@ class AVLTree:  # General tree
             self.visualize()
             print(" ")
 
-    def preorder_view(self, printed_node):
-        print(printed_node.key, end = " ")
-        if printed_node.left is not None:
-            self.preorder_view(printed_node.left)
-        if printed_node.right is not None:
-            self.preorder_view(printed_node.right)
+    def preorder_view(self, node):
+        print(node.key, end = " ")
+        if node.left is not None:
+            self.preorder_view(node.left)
+        if node.right is not None:
+            self.preorder_view(node.right)
 
-    def inorder_view(self, printed_node):
-        if printed_node.left is not None:
-            self.inorder_view(printed_node.left)
-        print(printed_node.key, end = " ")
-        if printed_node.right is not None:
-            self.inorder_view(printed_node.right)
+    def inorder_view(self, node):
+        if node.left is not None:
+            self.inorder_view(node.left)
+        print(node.key, end = " ")
+        if node.right is not None:
+            self.inorder_view(node.right)
 
-    def postorder_view(self, printed_node):
-        if printed_node.left is not None:
-            self.postorder_view(printed_node.left)
-        if printed_node.right is not None:
-            self.postorder_view(printed_node.right)
-        print(printed_node.key, end = " ")
+    def postorder_view(self, node):
+        if node.left is not None:
+            self.postorder_view(node.left)
+        if node.right is not None:
+            self.postorder_view(node.right)
+        print(node.key, end = " ")
 
     def visualize(self, order = None):  # main function for specific visualization
         if self.root_node is not None:
