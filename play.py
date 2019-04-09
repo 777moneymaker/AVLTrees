@@ -41,6 +41,7 @@ if __name__ == "__main__":
             tree.remove(numchoice)
         elif choice == "3":
             numchoice = int(input("Enter number to find path to: "))
+            tree.path_to_key(numchoice)
         elif choice == "4":
             viewchoice = input("Enter type of view (postorder, inorder, preorder): ")
             tree.visualize(viewchoice)

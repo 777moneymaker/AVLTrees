@@ -83,7 +83,10 @@ class AVLTree:  # General tree
             else:  # key not found
                 return None
 
-    def find_path_to_key(self, node, key):  # prints path to given key except root
+    def path_to_key(self, key):  # prints path to key
+        self.find_path_to_key(self.root_node, key)
+
+    def find_path_to_key(self, node, key):
         if node is not None:
             if key < node.key:
                 print(node.key)
