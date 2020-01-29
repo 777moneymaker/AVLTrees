@@ -13,7 +13,7 @@ class TreeNode:  # Nodes
         self.key = key
 
     def is_Leaf(self):
-        if (self.left and self.right) is None:
+        if self.left is None and self.right is None:
             return True
         else:
             return False
@@ -22,9 +22,9 @@ class TreeNode:  # Nodes
 class AVLTree:  # General tree
     def __init__(self, keys=None):
         self.root_node = None
-        if keys is not None:
-            if len(keys) >= 1:
-                for key in keys: self.insert(key)
+        if keys is not None and len (keys) >= 1:
+            for key in keys:
+                self.insert(key)
 
     def add_as_child(self, parent, child):  # Used in insert()
         if child.key < parent.key:
