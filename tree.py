@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Provides AVLTrees.
-
-Necessary for creating AVL Tree
-"""
-
+"""Provides AVLTrees. Necessary for creating AVL Tree."""
 
 class TreeNode:  # Nodes
     def __init__(self, key):
@@ -13,20 +9,17 @@ class TreeNode:  # Nodes
         self.key = key
 
     def is_Leaf(self):
-        if self.left is None and self.right is None:
-            return True
-        else:
-            return False
+        return True if not self.left and not self.right else False
 
 
-class AVLTree:  # General tree
+class AVLTree:  # General tree.
     def __init__(self, keys=None):
         self.root_node = None
-        if keys is not None and len (keys) >= 1:
+        if keys is not None and len(keys) >= 1:
             for key in keys:
                 self.insert(key)
 
-    def add_as_child(self, parent, child):  # Used in insert()
+    def add_as_child(self, parent, child):  # Used in insert().
         if child.key < parent.key:
             if parent.left is None:
                 parent.left = child
@@ -53,12 +46,9 @@ class AVLTree:  # General tree
         if arr is None or len(arr) < 1:
             return None
         piv = (len(arr)) // 2  # pivot
-        left, right = [], []
-        for key in arr[0:piv]:
-            left.append(key)
-        for key in arr[piv + 1:len(arr)]:
-            right.append(key)
         self.insert(arr[piv])
+        
+        left, right = arr[0:piv], arr[piv + 1:len(arr)]
         self.insert_from_list(left)  # there goes recursion (magic)
         self.insert_from_list(right)
 
@@ -148,7 +138,6 @@ class AVLTree:  # General tree
 
     def selfDelete(self):  # general function and visualization of deleting
         self.post_remove(self.root_node)
-        return None
 
     def post_remove(self, node):  # postorder remove
         root = self.root_node
